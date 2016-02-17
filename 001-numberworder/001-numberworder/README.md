@@ -11,7 +11,7 @@ ONETWOTHREEFOUR
 Invalid Input
 =============
 
-If the user does executes the program incorrectly, feedback will be provided. 
+If the user executes the program incorrectly, feedback will be provided. 
 
 E.g.
 

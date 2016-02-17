@@ -10,8 +10,19 @@ namespace _001_numberworder
     {
         private readonly string _userInput;
         private string output;
-        private readonly string[] _words = {"ZERO", "ONE", "TWO", "THREE", "FOUR", "FIVE", "SIX", "SEVEN", "EIGHT", "NINE"};
-  
+        private readonly Dictionary<int, string> _words = new Dictionary<int, string>()
+        {
+            {1, "ONE"},
+            {2, "TWO"},
+            {3, "THREE" },
+            {4, "FOUR" },
+            {5, "FIVE" },
+            {6, "SIX" },
+            {7, "SEVEN" },
+            {8, "EIGHT" },
+            {9, "NINE" }
+        };
+
         public NumberWorder(string numbers)
         {
             _userInput = numbers;
@@ -20,19 +31,21 @@ namespace _001_numberworder
 
         private void Translate()
         {
-            foreach (char c in _userInput)
+
+            var inputChars = _userInput.ToCharArray();
+            output = _userInput.Aggregate("", (current, next) =>
             {
-                var index = (int) Char.GetNumericValue(c);
-                if (index > -1)
+                int index;
+                var isInt = int.TryParse(next.ToString(), out index);
+                if (isInt)
                 {
-                    output += _words[index];
+                    return current + _words[index];
                 }
                 else
                 {
-                    output += ">> \"" + c + "\" invalid character supplied. Integers only, please.";
-                    return;
+                    return current + ">> \"" + next + "\" invalid character supplied. Integers only, please.<<";
                 }
-            }
+            });
         }
 
         public string GetOutput()

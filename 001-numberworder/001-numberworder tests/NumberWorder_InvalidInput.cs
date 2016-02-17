@@ -14,7 +14,7 @@ namespace _001_numberworder_tests
             var input = "12A34";
             var numberWorder = new NumberWorder(input);
             var output = numberWorder.GetOutput();
-            output.Should().Be("ONETWO>> \"A\" invalid character supplied. Integers only, please.");
+            output.Should().Be("ONETWO>> \"A\" invalid character supplied. Integers only, please.<<THREEFOUR");
         }
 
         [TestMethod]
@@ -23,7 +23,7 @@ namespace _001_numberworder_tests
             var input = "12#34";
             var numberWorder = new NumberWorder(input);
             var output = numberWorder.GetOutput();
-            output.Should().Be("ONETWO>> \"#\" invalid character supplied. Integers only, please.");
+            output.Should().Be("ONETWO>> \"#\" invalid character supplied. Integers only, please.<<THREEFOUR");
         }
 
         [TestMethod]
@@ -32,7 +32,7 @@ namespace _001_numberworder_tests
             var input = "12¡34";
             var numberWorder = new NumberWorder(input);
             var output = numberWorder.GetOutput();
-            output.Should().Be("ONETWO>> \"¡\" invalid character supplied. Integers only, please.");
+            output.Should().Be("ONETWO>> \"¡\" invalid character supplied. Integers only, please.<<THREEFOUR");
         }
 
     }
