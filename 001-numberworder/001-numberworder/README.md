@@ -25,4 +25,4 @@ You supplied too many arguments! Try again with one argument, please.
 
 Run NumberWorder with invalid arguments:
 > numberworder.exe  12!34
-ONETWO>> "!" invalid character supplied. Integers only, please.
+ONETWO>> "!" invalid character supplied. Integers only, please. <<THREEFOUR
