@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace _002_marsrovers
 {
@@ -10,6 +6,27 @@ namespace _002_marsrovers
     {
         static void Main(string[] args)
         {
+            switch (args.Length)
+            {
+                case (0):
+                    Console.WriteLine(UserFeedback.NoArgumentsSupplied);
+                    break;
+
+                case (1):
+                    var input = FileParser.Parse(args[0]);
+                    var inputIsValid = FileParser.InstructionsAreValid(input);
+                    if (inputIsValid)
+                    {
+                        var instructions = InstructionParser.Parse(input);
+                        InstructionParser.Execute(instructions);
+                    }
+                    break;
+
+                default:
+                    Console.WriteLine(UserFeedback.TooManyArgumentsSupplied);
+                    break;
+            }
+            Console.ReadLine();
         }
     }
 }
