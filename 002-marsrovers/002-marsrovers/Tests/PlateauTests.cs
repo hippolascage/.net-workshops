@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using _002_marsrovers;
 
 namespace Tests
 {
-    [TestClass]
+    [TestFixture]
     public class PlateauTests
     {
-        [TestMethod]
+        [Test]
         public void SetPlateauBounds()
         {
             Plateau.SetPlateauBounds(23, 52);
@@ -17,7 +17,7 @@ namespace Tests
             bounds.ShouldBeEquivalentTo(new Position(23, 52));
         }
 
-        [TestMethod]
+        [Test]
         public void AddRoversToPlateauAndTestForCollissions()
         {
             Plateau.SetPlateauBounds(10, 10);
@@ -51,7 +51,7 @@ namespace Tests
 
 
 
-        [TestMethod]
+        [Test]
         public void TestForValidPositions()
         {
             Plateau.SetPlateauBounds(10, 10);

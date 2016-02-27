@@ -1,14 +1,14 @@
 ﻿using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using _002_marsrovers;
 
 namespace Tests
 {
-    [TestClass]
+    [TestFixture]
     public class PositionTests
     {
 
-        [TestMethod]
+        [Test]
         public void CreateAndSetPosition()
         {
             var position = new Position(5, 3);
@@ -18,14 +18,14 @@ namespace Tests
             position.GetPosition().ShouldBeEquivalentTo(new Position(6, 2));
         }
 
-        [TestMethod]
+        [Test]
         public void PositionToString()
         {
             var position = new Position(3, 1);
             position.ToString().Should().Be("3, 1");
         }
 
-        [TestMethod]
+        [Test]
         public void PositionIsDistinct()
         {
             var positionA = new Position(5, 5);

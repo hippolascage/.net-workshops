@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using _002_marsrovers;
 
 namespace Tests
 {
-    [TestClass]
+    [TestFixture]
     public class RoverTests
     {
 
-        [TestMethod]
+        [Test]
         public void CreateRoversAndGetPositionsAndHeadings()
         {
             var positionA = new Position(5, 5);
@@ -24,10 +24,17 @@ namespace Tests
             var roverB = new Rover(positionB, headingB, new Guid(), pathB);
 
             roverA.GetHeading().Should().Be('N');
-            roverB.GetPosition().ShouldBeEquivalentTo(new Position(4, 4));
+            roverB.Position.ShouldBeEquivalentTo(new Position(4, 4));
         }
 
-        [TestMethod]
+        // data driven tests (not supported inline by mstest, use nunit)
+        //[TestCase("MML", 5, 7, Name = "Success Movement")]
+        public void MoveTest(string path, int expectedY, int expectedX)
+        {
+            
+        }
+
+        [Test]
         public void MoveRover()
         {
             Plateau.SetPlateauBounds(10, 10);
@@ -40,7 +47,7 @@ namespace Tests
             var successA = roverA.FollowPath();
             successA.Should().BeTrue();
             roverA.GetHeading().Should().Be('W');
-            roverA.GetPosition().ShouldBeEquivalentTo(new Position(5, 7));
+            roverA.Position.ShouldBeEquivalentTo(new Position(5, 7));
 
             var positionB = new Position(4, 4);
             var headingB = new Heading('S');
@@ -49,7 +56,7 @@ namespace Tests
             var successB = roverB.FollowPath();
             successB.Should().BeFalse();
             roverB.GetHeading().Should().Be('S');
-            roverB.GetPosition().ShouldBeEquivalentTo(new Position(4, -1));
+            roverB.Position.ShouldBeEquivalentTo(new Position(4, -1));
         }
     }
 }

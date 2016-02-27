@@ -1,20 +1,20 @@
 ﻿using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using _002_marsrovers;
 
 namespace Tests
 {
-    [TestClass]
+    [TestFixture]
     public class HeadingTests
     {
-        [TestMethod]
+        [Test]
         public void CreateHeading()
         {
             var north = new Heading('N');
             north.GetHeading().Should().Be('N');
         }
 
-        [TestMethod]
+        [Test]
         public void CreateHeadingAndDoSomeTurns()
         {
             var heading = new Heading('N');

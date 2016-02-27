@@ -13,6 +13,9 @@ namespace _002_marsrovers
                     break;
 
                 case (1):
+                    // strip out to method
+
+                    // combine validation and parsing
                     var input = FileParser.Parse(args[0]);
                     var inputIsValid = FileParser.InstructionsAreValid(input);
                     if (inputIsValid)

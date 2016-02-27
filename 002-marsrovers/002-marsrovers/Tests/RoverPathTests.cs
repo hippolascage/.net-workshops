@@ -1,13 +1,13 @@
 ﻿using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using _002_marsrovers;
 
 namespace Tests
 {
-    [TestClass]
+    [TestFixture]
     public class RoverPathTests
     {
-        [TestMethod]
+        [Test]
         public void CreateRoverPaths()
         {
             var positionA = new Position(5, 5);

@@ -1,20 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 
 namespace _002_marsrovers
 {
     public class Rover
     {
         private readonly Guid _id;
-        private readonly Position _position;
+        public Position Position { get; private set; } // expose property directly instead of getter and setter methods
         private readonly Heading _heading;
         private readonly List<char> _path;
 
+        // path shouldn't be part of the constructor, the rover can exist without it
+
+        // convert _path to an enum to reduce the possible valid ideas
+        // extension methods 
+
         public Rover(Position position, Heading heading, Guid id, List<char> path)
         {
+            // generate id within this class
             _id = id;
-            _position = position;
+            Position = position;
             _heading = heading;
             _path = path;
         }
@@ -24,44 +29,45 @@ namespace _002_marsrovers
             return _id;
         }
 
-        public Position GetPosition()
-        {
-            return _position;
-        }
 
         public char GetHeading()
         {
             return _heading.GetHeading();
         }
          
+        
         private bool TryMove()
         {
-            if (_heading.GetHeading() == ('N'))
+            var movements = new Dictionary<char, Action<Position>>();
+            movements['N'] = (Position p) => p.SetPosition(p.X, p.X + 1);
+            movements[_heading.GetHeading()](Position);
+
+            switch (_heading.GetHeading())
             {
-                _position.SetPosition(_position.X, _position.Y + 1);
-            }
-            else if (_heading.GetHeading() == ('S'))
-            {
-                _position.SetPosition(_position.X, _position.Y - 1);
-            }
-            else if (_heading.GetHeading() == ('E'))
-            {
-                _position.SetPosition(_position.X + 1, _position.Y);
-            }
-            else if (_heading.GetHeading() == ('W'))
-            {
-                _position.SetPosition(_position.X - 1, _position.Y);
+                case ('N'):
+                    Position.SetPosition(Position.X, Position.Y + 1);
+                    break;
+                case ('S'):
+                    Position.SetPosition(Position.X, Position.Y - 1);
+                    break;
+                case ('E'):
+                    Position.SetPosition(Position.X + 1, Position.Y);
+                    break;
+                case ('W'):
+                    Position.SetPosition(Position.X - 1, Position.Y);
+                    break;
+                    //default: throw something
             }
             return RoverStillOperational();
         }
 
         private bool RoverStillOperational()
         {
-            if (!Plateau.IsValidPosition(_position))
+            if (!Plateau.IsValidPosition(Position))
             {
                 return false;
             }
-            return !Plateau.RoverAtPosition(_position);
+            return !Plateau.RoverAtPosition(Position);
         }
 
         private void TurnRight()
@@ -76,7 +82,7 @@ namespace _002_marsrovers
 
         public bool FollowPath()
         {
-            var roverStillRunning = Plateau.IsValidPosition(_position);
+            var roverStillRunning = Plateau.IsValidPosition(Position);
             foreach (var step in _path)
             {
                 if (roverStillRunning)

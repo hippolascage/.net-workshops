@@ -34,7 +34,7 @@ namespace _002_marsrovers
             }
             return RoverPathList;
         }
-
+        
         public static void Execute(IEnumerable<RoverPath> instructions)
         {
             foreach (var rover in instructions.Select(instruction => new Rover(instruction.GetStartPosition(), 
@@ -43,15 +43,15 @@ namespace _002_marsrovers
                 var success = rover.FollowPath();
                 if (success)
                 {
-                    Console.WriteLine(UserFeedback.RoverMovementCompleted, rover.GetPosition().X, rover.GetPosition().Y,
+                    Console.WriteLine(UserFeedback.RoverMovementCompleted, rover.Position.X, rover.Position.Y,
                         rover.GetHeading());
                 }
                 else
                 {
-                    Console.WriteLine(UserFeedback.RoverMovementAbandoned, rover.GetPosition().X, rover.GetPosition().Y,
+                    Console.WriteLine(UserFeedback.RoverMovementAbandoned, rover.Position.X, rover.Position.Y,
                         rover.GetHeading());
                 }
-                Plateau.AddRoverToPosition(rover.GetPosition(), rover);
+                Plateau.AddRoverToPosition(rover.Position, rover);
             }
         }
     }

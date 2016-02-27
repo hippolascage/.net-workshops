@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using System.IO;
 using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using _002_marsrovers;
 
 namespace Tests
 {
-    [TestClass]
+    [TestFixture]
     public class FileParserTests
     {    
-        [TestMethod]
+        [Test]
         public void Parse_InvalidFilePath()
         {
             var stringWriter  = new StringWriter();
@@ -22,7 +22,7 @@ namespace Tests
             stringWriter.ToString().Should().StartWith(UserFeedback.FileCouldNotBeRead);
         }
 
-        [TestMethod]
+        [Test]
         public void Parse_ValidFilePath()
         {
             var stringWriter = new StringWriter();
@@ -35,7 +35,7 @@ namespace Tests
             stringWriter.ToString().Should().BeEmpty();
         }
 
-        [TestMethod]
+        [Test]
         public void InstructionsAreValid_ValidInstructions()
         {
             var instructions = new List<string> { "5 5", "1 2 N", "LMLMLMLMM", "3 3 E", "MMRMMRMRRM" };
@@ -43,7 +43,7 @@ namespace Tests
             instructionsAreValid.Should().BeTrue();
         }
    
-        [TestMethod]
+        [Test]
         public void InstructionsAreValid_InvalidBounds()
         {
             var instructions = new List<string> { "5 5 3", "1 2 N", "LMLMLMLMM", "3 3 E", "MMRMMRMRRM" };
@@ -51,7 +51,7 @@ namespace Tests
             instructionsAreValid.Should().BeFalse();
         }
 
-        [TestMethod]
+        [Test]
         public void InstructionsAreValid_InvalidStartingPoint()
         {
             var instructions = new List<string> { "5 5", "1 2 N 4", "LMLMLMLMM", "3 3 E", "MMRMMRMRRM" };
@@ -59,7 +59,7 @@ namespace Tests
             instructionsAreValid.Should().BeFalse();
         }
 
-        [TestMethod]
+        [Test]
         public void InstructionsAreValid_InvalidMovementInstructions()
         {
             var instructions = new List<string> { "5 5", "1 2 N", "LMLMLMLMM", "3 3 E", "MMRNMMRMRRM" };

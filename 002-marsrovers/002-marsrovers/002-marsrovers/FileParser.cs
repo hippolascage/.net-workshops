@@ -21,13 +21,14 @@ namespace _002_marsrovers
                 {
                     input.Add(line);
                 }
-                file.Close();
+                file.Close(); // wrap streamreader in a using statement
             }
             catch (IOException e)
             {
                 Console.WriteLine(UserFeedback.FileCouldNotBeRead + e.Message);
             }
-            return input;
+            return input; // return within try, throw an exception for partial read 
+            // file. readalllines
         }
 
         public static bool InstructionsAreValid(List<string> instructionsList)
@@ -49,7 +50,7 @@ namespace _002_marsrovers
                     case (1): // odd numbered rows should be starting positions + headings
                         if (!ValidStartingPosition(instructionsList[i]))
                         {
-                            Console.WriteLine(UserFeedback.InvalidStartingPoint, i);
+                            Console.WriteLine($"This is invalid {i}");
                             return false;
                         }
                         break;
