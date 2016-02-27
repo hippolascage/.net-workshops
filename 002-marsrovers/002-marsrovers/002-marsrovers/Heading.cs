@@ -1,49 +1,51 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Drawing.Imaging;
 
 namespace _002_marsrovers
 {
     public class Heading
     {
-        private readonly List<char> _headings = new List<char> { 'N', 'E', 'S', 'W'};
-        private int _headingIndex;
+        private enum Headings {N, E, W, S};
+        private char CurrentHeading { get; set; }
+        private Dictionary<char, char> RightTurns = new Dictionary<char, char>()
+        {
+            { 'N', 'E' },
+            { 'S', 'W' },
+            { 'E', 'S' },
+            { 'W', 'N' }
+        };
+        private Dictionary<char, char> LeftTurns = new Dictionary<char, char>()
+        {
+            { 'N', 'W' },
+            { 'S', 'E' },
+            { 'E', 'N' },
+            { 'W', 'S' }
+        };
 
         public Heading(char heading)
         {
-            _headingIndex = _headings.IndexOf(heading);
+            CurrentHeading = heading;
         }
 
         public void TurnRight()
         {
-            if (_headingIndex == 3)
-            {
-                _headingIndex = 0;
-            }
-            else
-            {
-                _headingIndex++;
-            }
+            CurrentHeading = RightTurns[CurrentHeading];
         }
 
         public void TurnLeft()
         {
-            if (_headingIndex == 0)
-            {
-                _headingIndex = 3;
-            }
-            else
-            {
-                _headingIndex--;
-            }
+            CurrentHeading = LeftTurns[CurrentHeading];
         }
 
         public char GetHeading()
         {
-            return _headings[_headingIndex];
+            return CurrentHeading;
         }
 
         public void SetHeading(char heading)
         {
-            _headingIndex = _headings.IndexOf(heading);
+            CurrentHeading = heading;
         }
     }
 }
